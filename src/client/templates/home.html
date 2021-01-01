@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="{{url_for('static',filename='js/jquery-3.4.1.min.js')}}""></script>
+        <link rel="stylesheet" href="{{url_for('static',filename="css/reset.css") }}" media="all">
+        <link rel="stylesheet" href="{{url_for('static',filename="css/home.css") }}" media="all">
+
+    </head>
+    <body>
+        <div class = "wrapper">
+            <div class = "line">
+                <div class = "cell">
+                    <p></p>
+                </div>
+                <div class = "cell titlecell">
+                    <p>List of All Students</p>
+                </div>
+                <div class = "cell">
+                    <p></p>
+                </div>
+                <div class = "cell">
+                    <p></p>
+                </div>
+                <div class = "cell">
+                    <button class="button" onclick = "window.location.href = './add'"><span>Add student</span></button>
+                </div>
+            </div>
+            <div class = "line">
+                <div class = "cell">
+                    <p>Portrait</p>
+                </div>
+                <div class = "cell">
+                    <p>Id</p>
+                </div>
+                <div class = "cell">
+                    <p>Name</p>
+                </div>
+                <div class = "cell">
+                    <p></p>
+                </div>
+                <div class = "cell">
+                    <p></p>
+                </div>
+            </div>
+            {% for student in students %}
+            <div class = "line">
+                <div class = "cell">
+                    <img src = "{{url_for('static',filename="img/%s" %(student.photo_path)) }}">
+                </div>
+                <div class = "cell">
+                    <p>{{student.id}}</p>
+                </div>
+                <div class = "cell">
+                    <p>{{student.name}}</p>
+                </div>
+                <div class = "cell">
+                    <button class="button"  onclick = "window.location.href = './modify/{{student.id}}'"><span>Modify</span></button>
+                </div>
+                <div class = "cell">
+                    <button class="button" onclick = "window.location.href = './delete/{{student.id}}'"><span>Delete</span></button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </body>
+</html>

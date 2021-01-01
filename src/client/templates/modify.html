@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="{{url_for('static',filename='js/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{url_for('static',filename='js/img.js')}}"></script>
+        <link rel="stylesheet" href="{{url_for('static',filename="css/reset.css") }}" media="all">
+        <link rel="stylesheet" href="{{url_for('static',filename="css/modify.css") }}" media="all">
+    </head>
+    <body>
+        <div class = "content">
+            <p class="main">{{type}} student</p>
+            <form class = "wrapper" action="/{{type}}" method="POST" enctype="multipart/form-data">
+                {% if student.photo_path == 'No image here' %}
+                <img class="uploadimg" src="">
+                {% else %}
+                <img class="uploadimg" src="{{url_for('static',filename="img/%s" %(student.photo_path))}}">
+                {% endif %}
+                <div class="imgpath"><p class="path">{{student.photo_path}}</p></div>
+                <div class="buttondiv">
+                    <input class="file" type="file" name="file" id="file">
+                    <span>Upload</span>
+                </div>
+                <div class="text">
+                    <p class="title">ID</p>
+                    {% if student.photo_path == 'No image here' %}
+                    <input name = "id" type="text" class = "id" oninput="value = value.replace(/\D/g,'')" value="{{student.id}}">
+                    {% else %}
+                    <input name = "id" type="text" class = "id" oninput="value = value.replace(/\D/g,'')" value="{{student.id}}" readonly="readonly">
+                    {% endif %}
+                </div>
+                <div class="text">
+                    <p class="title">Name</p>
+                    <input name = "name" type="text" class = "name" value="{{student.name}}">
+                </div>
+                <button class="button" type="button"><span>Submit</span></button>      
+            </form>
+        </div>
+    </body>
+</html>
